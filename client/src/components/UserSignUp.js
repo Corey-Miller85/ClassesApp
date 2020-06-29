@@ -8,17 +8,11 @@ export default class UserSignUp extends Component {
 		lastName: "",
 		emailAddress: "",
 		password: "",
-		errors: []
+		errors: [],
 	};
 
 	render() {
-		const {
-			firstName,
-			lastName,
-			emailAddress,
-			password,
-			errors
-		} = this.state;
+		const { firstName, lastName, emailAddress, password, errors } = this.state;
 
 		return (
 			<div className='bounds'>
@@ -75,13 +69,13 @@ export default class UserSignUp extends Component {
 		);
 	}
 
-	change = event => {
+	change = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
 
 		this.setState(() => {
 			return {
-				[name]: value
+				[name]: value,
 			};
 		});
 	};
@@ -95,21 +89,21 @@ export default class UserSignUp extends Component {
 			firstName,
 			lastName,
 			emailAddress,
-			password
+			password,
 		};
 		console.log(user);
 		context.data
 			.createUser(user)
-			.then(errors => {
+			.then((errors) => {
 				if (errors && errors.length) {
 					this.setState({ errors });
 				} else {
 					context.actions.signIn(emailAddress, password).then(() => {
-						this.props.history.push("/authenticated");
+						this.props.history.push("/");
 					});
 				}
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.log(err);
 				this.props.history.push("/error");
 			});
